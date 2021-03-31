@@ -5,7 +5,7 @@
 
 ## Study Roadmap :snake:
 ### Dynamic programming
-- [ ] Policy iteration
+- [x] Policy iteration
 - [ ] Value iteration
 
 ### Monte-Carlo Learning

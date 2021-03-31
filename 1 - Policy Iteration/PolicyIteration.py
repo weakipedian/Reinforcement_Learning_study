@@ -4,8 +4,8 @@ from copy import copy
 class Poilcy_iteration():
 
     def __init__(self):
-        self.width = 4
-        self.height = 4
+        self.width = 5
+        self.height = 5
 
         self.V = np.zeros(shape=(self.width,self.height))
         self.V_old = np.zeros(shape=(self.width,self.height), dtype=np.float16)
@@ -53,13 +53,15 @@ class Poilcy_iteration():
                 for idx, action in enumerate(self.actions):
 
                     try:
-
-                        if x + self.actions[action][0] < 0 or y + self.actions[action][1] < 0 :
-                            pass
-                        elif x + self.actions[action][0]>= self.height or y + self.actions[action][1] >= self.width :
+                        if (x,y) in self.terminal_state:
                             pass
                         else:
-                            self.Q[idx][x][y] = self.reward + self.gamma * self.V[x + self.actions[action][0]][y + self.actions[action][1]]
+                            if x + self.actions[action][0] < 0 or y + self.actions[action][1] < 0 or \
+                                    x + self.actions[action][0] >= self.height or y + self.actions[action][1] >= self.width:
+                                pass
+
+                            else:
+                                self.Q[idx][x][y] = self.reward + self.gamma * self.V[x + self.actions[action][0]][y + self.actions[action][1]]
 
                     except IndexError:
                         pass
@@ -92,13 +94,13 @@ class Poilcy_iteration():
 
 policy = Poilcy_iteration()
 pol = policy.policy
-iter = 300
+iter = 3
 for _ in range(iter):
     V,Q = policy.evaluation(pol)
     print("V\n",V)
     #print("Q\n", Q)
 
     pol = policy.improvement(Q)
-    #print("POLICY\n",pol)
+    print("POLICY\n",pol)
 
 

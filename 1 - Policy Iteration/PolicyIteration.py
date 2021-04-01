@@ -4,8 +4,8 @@ from copy import copy
 class Poilcy_iteration():
 
     def __init__(self):
-        self.width = 5
-        self.height = 5
+        self.width = 7
+        self.height = 7
 
         self.V = np.zeros(shape=(self.width,self.height))
         self.V_old = np.zeros(shape=(self.width,self.height), dtype=np.float16)
@@ -14,7 +14,7 @@ class Poilcy_iteration():
                         "right":(0,1),
                         "up":(-1,0),
                         "down":(1,0)}
-        self.terminal_state = [(0,0), (self.width-1,self.height-1), (self.width-1, 0), (0,self.height-1)]
+        self.terminal_state = [(0,0), (self.width-1,self.height-1)]#, (self.width-1, 0), (0,self.height-1)]
 
         self.gamma = 0.9
         #Random policy
@@ -35,30 +35,28 @@ class Poilcy_iteration():
                         else:
                             if x + self.actions[action][0] < 0 or y + self.actions[action][1] < 0 or \
                                     x + self.actions[action][0]>= self.height or y + self.actions[action][1] >= self.width :
-                                pass
-                            # elif x + self.actions[action][0]>= self.height or y + self.actions[action][1] >= self.width :
-                            #     self.V[x][y] += policy[idx][x + self.actions[action][0]][y + self.actions[action][1]] * \
-                            #                     (self.reward + self.gamma * self.V_old[x][y])
+                                self.V[x][y] += policy[idx][x][y] * (self.reward + self.gamma * self.V_old[x][y])
+
                             else:
-                                self.V[x][y] += policy[idx][x+self.actions[action][0]][y+self.actions[action][1]] *\
+                                self.V[x][y] += policy[idx][x][y] *\
                                                 ( self.reward+ self.gamma* self.V_old[x+self.actions[action][0]][y+self.actions[action][1]])
 
-                    except IndexError:
-                        print(x,y)
-        self.V_old = copy(self.V)
 
-        # Get action-value function
+                    except IndexError:
+                        print("INDEXERROR")
+        self.V_old = copy(self.V)
+        print(self.V)
+        #Get action-value function
         for x in range(self.width):
             for y in range(self.height):
                 for idx, action in enumerate(self.actions):
-
                     try:
                         if (x,y) in self.terminal_state:
-                            pass
+                            self.Q[idx][x][y] = self.reward + self.gamma * self.V[x][y]
                         else:
                             if x + self.actions[action][0] < 0 or y + self.actions[action][1] < 0 or \
                                     x + self.actions[action][0] >= self.height or y + self.actions[action][1] >= self.width:
-                                pass
+                                self.Q[idx][x][y] = self.reward + self.gamma * self.V[x][y]
 
                             else:
                                 self.Q[idx][x][y] = self.reward + self.gamma * self.V[x + self.actions[action][0]][y + self.actions[action][1]]
@@ -85,22 +83,15 @@ class Poilcy_iteration():
         return self.policy
 
 
-
-
-
-
-        #return self.policy/len(self.actions)
-
-
 policy = Poilcy_iteration()
 pol = policy.policy
-iter = 3
+iter = 300
 for _ in range(iter):
     V,Q = policy.evaluation(pol)
     print("V\n",V)
     #print("Q\n", Q)
 
     pol = policy.improvement(Q)
-    print("POLICY\n",pol)
+    #print("POLICY\n",pol)
 
 

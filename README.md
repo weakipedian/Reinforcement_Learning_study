@@ -8,11 +8,11 @@ Every Tuesday 6:30PM
 
 ## Study Roadmap :snake:
 ### Dynamic programming
-- [ ] Policy iteration : 21.04.05
-- [ ] Value iteration
+- [x] Policy iteration : 21.04.06
+- [ ] Value iteration  : 21.04.13
 
 ### Monte-Carlo Learning
-- [ ] Monte-Carlo
+- [ ] Monte-Carlo      : 21.04.13
 
 ### Temporal Difference learning
 - [ ] SARSA

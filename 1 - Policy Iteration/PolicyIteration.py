@@ -4,11 +4,11 @@ from copy import copy
 class Poilcy_iteration():
 
     def __init__(self):
-        self.width = 7
-        self.height = 7
+        self.width = 5
+        self.height = 5
 
-        self.V = np.zeros(shape=(self.width,self.height))
-        self.V_old = np.zeros(shape=(self.width,self.height), dtype=np.float16)
+        self.V = np.zeros(shape=(self.height,self.width))
+        self.V_old = np.zeros(shape=(self.height,self.width), dtype=np.float16)
 
         self.actions = {"left":(0,-1),
                         "right":(0,1),
@@ -18,15 +18,15 @@ class Poilcy_iteration():
 
         self.gamma = 0.9
         #Random policy
-        self.policy = np.ones(shape=(len(self.actions),self.width,self.height)) * 0.25
-        self.Q = np.zeros((len(self.actions),self.width,self.height))
+        self.policy = np.ones(shape=(len(self.actions),self.height,self.width)) * 0.25
+        self.Q = np.zeros((len(self.actions),self.height,self.width))
         self.reward = -1
 
     def evaluation(self,policy):
         # Get value function
-        self.V = np.zeros(shape=(self.width,self.height))
-        for x in range(self.width):
-            for y in range(self.height):
+        self.V = np.zeros(shape=(self.height,self.width))
+        for x in range(self.height):
+            for y in range(self.width):
                 for idx, action in enumerate(self.actions):
 
                     try:
@@ -43,12 +43,12 @@ class Poilcy_iteration():
 
 
                     except IndexError:
-                        print("INDEXERROR")
+                        print("INDEXERROR",idx,x,y)
         self.V_old = copy(self.V)
-        print(self.V)
+
         #Get action-value function
-        for x in range(self.width):
-            for y in range(self.height):
+        for x in range(self.height):
+            for y in range(self.width):
                 for idx, action in enumerate(self.actions):
                     try:
                         if (x,y) in self.terminal_state:
@@ -76,7 +76,7 @@ class Poilcy_iteration():
             get_num_argmax[x][y] += 1
         prob =  1/get_num_argmax
 
-        self.policy = np.zeros(shape=(len(self.actions),self.width,self.height))
+        self.policy = np.zeros(shape=(len(self.actions),self.height,self.width))
         for idx,x,y in q_argmax:
             self.policy[idx][x][y] = prob[x][y]
 

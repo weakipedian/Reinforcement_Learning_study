@@ -14,7 +14,7 @@ class Poilcy_iteration():
                         "right":(0,1),
                         "up":(-1,0),
                         "down":(1,0)}
-        self.terminal_state = [(0,0), (self.width-1,self.height-1)]#, (self.width-1, 0), (0,self.height-1)]
+        self.terminal_state = [(0,0), (self.width-1,self.height-1)]
 
         self.gamma = 0.9
         #Random policy
@@ -44,6 +44,7 @@ class Poilcy_iteration():
 
                     except IndexError:
                         print("INDEXERROR",idx,x,y)
+        self.diff = self.V - self.V_old
         self.V_old = copy(self.V)
 
         #Get action-value function
@@ -66,7 +67,7 @@ class Poilcy_iteration():
 
 
 
-        return self.V, self.Q
+        return self.V, self.Q, self.diff
 
     def improvement(self, q_func):
 
@@ -74,7 +75,7 @@ class Poilcy_iteration():
         get_num_argmax = np.zeros(shape=(self.width,self.height))
         for idx, x, y in q_argmax:
             get_num_argmax[x][y] += 1
-        prob =  1/get_num_argmax
+        prob = 1./get_num_argmax
 
         self.policy = np.zeros(shape=(len(self.actions),self.height,self.width))
         for idx,x,y in q_argmax:
@@ -85,13 +86,14 @@ class Poilcy_iteration():
 
 policy = Poilcy_iteration()
 pol = policy.policy
-iter = 300
-for _ in range(iter):
-    V,Q = policy.evaluation(pol)
+iter = 10
+e = 1e-4
+while True:
+    V ,Q, diff = policy.evaluation(pol)
     print("V\n",V)
-    #print("Q\n", Q)
-
     pol = policy.improvement(Q)
-    #print("POLICY\n",pol)
+    if abs(diff).any() < e:
+        break
+
 
 

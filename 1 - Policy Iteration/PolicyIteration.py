@@ -4,8 +4,9 @@ from copy import copy
 class Poilcy_iteration():
 
     def __init__(self):
-        self.width = 5
-        self.height = 5
+        self.mapsize = 5
+        self.width = self.mapsize
+        self.height = self.mapsize
 
         self.V = np.zeros(shape=(self.height,self.width))
         self.V_old = np.zeros(shape=(self.height,self.width), dtype=np.float16)
@@ -25,8 +26,8 @@ class Poilcy_iteration():
     def evaluation(self,policy):
         # Get value function
         self.V = np.zeros(shape=(self.height,self.width))
-        for x in range(self.height):
-            for y in range(self.width):
+        for x in range(self.width):
+            for y in range(self.height):
                 for idx, action in enumerate(self.actions):
 
                     try:
@@ -45,6 +46,7 @@ class Poilcy_iteration():
                     except IndexError:
                         print("INDEXERROR",idx,x,y)
         self.diff = self.V - self.V_old
+
         self.V_old = copy(self.V)
 
         #Get action-value function
@@ -92,7 +94,8 @@ while True:
     V ,Q, diff = policy.evaluation(pol)
     print("V\n",V)
     pol = policy.improvement(Q)
-    if abs(diff).any() < e:
+
+    if (abs(diff)<e).all():
         break
 
 

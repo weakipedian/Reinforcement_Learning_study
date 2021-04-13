@@ -74,8 +74,8 @@ if __name__ == '__main__':
 
             # interact with env
             if i > 0.999 * max_episode: # use only one of two render function
-                # env.render()
-                env.render_qvalues(mc.qvalues)
+                env.render()
+                # env.render_qvalues(mc.qvalues)
 
             action = mc.get_action_e_greedy(state, (max_episode - i) / max_episode)
             next_state, reward, done, info = env.step(action)

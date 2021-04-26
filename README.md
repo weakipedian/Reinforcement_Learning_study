@@ -8,14 +8,14 @@ Every Tuesday 6:30PM
 
 ## Study Roadmap :snake:
 ### Dynamic programming
-- [x] Policy iteration : 21.04.06
-- [x] Value iteration  : 21.04.13
+- [x] Policy iteration : 21.04.06 (신희중)
+- [x] Value iteration  : 21.04.13 (박태욱)
 
 ### Monte-Carlo Learning
-- [x] Monte-Carlo      : 21.04.13
+- [x] Monte-Carlo      : 21.04.13 (박태욱)
 
 ### Temporal Difference learning
-- [ ] SARSA            : 21.04.29
+- [ ] SARSA            : 21.04.29 (신희중)
 - [ ] Q-learning       
 ***
 <img src=https://user-images.githubusercontent.com/31655488/113001018-5b2c5800-91ab-11eb-89f8-17a7090f075d.jpg width="40%"> 

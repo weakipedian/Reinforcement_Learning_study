@@ -16,6 +16,6 @@ Every Tuesday 6:30PM
 
 ### Temporal Difference learning
 - [x] SARSA            : 21.04.29 (신희중)
-- [ ] Q-learning       : 21.05.07 (
+- [ ] Q-learning       : 21.05.07 (박태욱)
 ***
 <img src=https://user-images.githubusercontent.com/31655488/113001018-5b2c5800-91ab-11eb-89f8-17a7090f075d.jpg width="40%"> 

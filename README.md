@@ -15,7 +15,7 @@ Every Tuesday 6:30PM
 - [x] Monte-Carlo      : 21.04.13 (박태욱)
 
 ### Temporal Difference learning
-- [ ] SARSA            : 21.04.29 (신희중)
-- [ ] Q-learning       
+- [x] SARSA            : 21.04.29 (신희중)
+- [ ] Q-learning       : 21.05.07 (
 ***
 <img src=https://user-images.githubusercontent.com/31655488/113001018-5b2c5800-91ab-11eb-89f8-17a7090f075d.jpg width="40%"> 

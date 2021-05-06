@@ -16,6 +16,9 @@ Every Tuesday 6:30PM
 
 ### Temporal Difference learning
 - [x] SARSA            : 21.04.29 (신희중)
-- [ ] Q-learning       : 21.05.07 (박태욱)
+- [X] Q-learning       : 21.05.07 (박태욱)
+### TIPs toward Deep Reinforcement Learning (Thanks to [정민재](https://github.com/keep9oing))
+https://docs.google.com/presentation/d/1bulPS0jMu-ZYi0xMCcmk8fs8_1Px_jKKpQdz9Ytpi2g/edit?usp=sharing
 ***
 <img src=https://user-images.githubusercontent.com/31655488/113001018-5b2c5800-91ab-11eb-89f8-17a7090f075d.jpg width="40%"> 
+
